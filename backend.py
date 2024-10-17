@@ -91,6 +91,7 @@ center_x = shift_x + selected_display_width // 2
 center_y = shift_y + selected_display_height // 2
 
 restrict_border_collisions = False
+extreme_lock = False
 
 
 
@@ -100,6 +101,8 @@ def is_mouse_on_target_display():
         delta = 64
         if current_display["primary"]:
             delta = 16
+        if extreme_lock:
+            delta = 256
         return (shift_x + delta <= pointer.root_x < shift_x + selected_display_width - delta and
                 shift_y + delta <= pointer.root_y < shift_y + selected_display_height - delta)
     return (shift_x <= pointer.root_x < shift_x + selected_display_width and

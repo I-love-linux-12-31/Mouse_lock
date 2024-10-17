@@ -12,7 +12,8 @@ from PyQt6.QtWidgets import (
     QLabel,
     QMenu,
     QSpinBox,
-    QCheckBox
+    QCheckBox,
+    QMessageBox,
 
 )
 from PyQt6.uic import loadUi
@@ -30,6 +31,7 @@ class MainWindow(QWidget):
     # label: QLabel
     update_interval_input: QSpinBox
     border_collisions_politic: QCheckBox
+    extreme_lock_checkbox: QCheckBox
 
     def __init__(self):
         super().__init__()
@@ -55,6 +57,36 @@ class MainWindow(QWidget):
         self.display_selection.currentTextChanged.connect(self.change_display_selection)
         self.update_interval_input.valueChanged.connect(self.update_work_function_timer)
         self.border_collisions_politic.checkStateChanged.connect(self.change_border_collisions_politic)
+
+        self.extreme_lock_dialog = QMessageBox(self)
+        self.extreme_lock_dialog.setWindowTitle("Warning !")
+        # self.extreme_lock_dialog.
+        self.extreme_lock_dialog.setText("Warning! "
+                                         "If you enable this mode, you will have difficult to disable mouse lock.\n"
+                                         "Also you can't interact with some UI in game.\n"
+                                         "Do you want to continue?")
+        self.extreme_lock_dialog.setIcon(QMessageBox.Icon.Warning)
+
+        self.extreme_lock_dialog.setStandardButtons(
+            QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+
+        self.extreme_lock_checkbox.checkStateChanged.connect(self.extreme_lock_dialog_function)
+
+    def extreme_lock_dialog_function(self):
+        if self.extreme_lock_checkbox.isChecked():
+            status = self.extreme_lock_dialog.exec()
+            if status == QMessageBox.StandardButton.Ok:
+                backend.extreme_lock = True
+                backend.restrict_border_collisions = True
+                self.update_interval_input.setValue(120)
+                self.update_work_function_timer()
+                self.border_collisions_politic.setChecked(True)
+            else:
+                backend.extreme_lock = False
+                self.extreme_lock_checkbox.setChecked(False)
+        else:
+            backend.extreme_lock = False
+
 
     def update_work_function_timer(self):
         self.timer.setInterval(1000 // self.update_interval_input.value())
