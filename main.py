@@ -1,7 +1,7 @@
 import sys
 
 from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtCore import QCoreApplication, Qt, QTimer
+from PyQt6.QtCore import QCoreApplication, Qt, QTimer, QT_VERSION
 
 from PyQt6.QtWidgets import (
     QApplication,
@@ -35,7 +35,7 @@ class MainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        loadUi('main.ui', self)
+        loadUi('/opt/Mouse-lock/main.ui', self)
 
         self.mouse_grab_on = False
 
@@ -56,7 +56,6 @@ class MainWindow(QWidget):
 
         self.display_selection.currentTextChanged.connect(self.change_display_selection)
         self.update_interval_input.valueChanged.connect(self.update_work_function_timer)
-        self.border_collisions_politic.checkStateChanged.connect(self.change_border_collisions_politic)
 
         self.extreme_lock_dialog = QMessageBox(self)
         self.extreme_lock_dialog.setWindowTitle("Warning !")
@@ -70,7 +69,14 @@ class MainWindow(QWidget):
         self.extreme_lock_dialog.setStandardButtons(
             QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
 
-        self.extreme_lock_checkbox.checkStateChanged.connect(self.extreme_lock_dialog_function)
+        if QT_VERSION >= 0x060700:
+            self.border_collisions_politic.checkStateChanged.connect(self.change_border_collisions_politic)
+            self.extreme_lock_checkbox.checkStateChanged.connect(self.extreme_lock_dialog_function)
+        else:
+            # Legacy PyQt6 (I found this problem on debian12)
+            print("\033[33mWarning:\033[0m You are run application with NOT latest PyQt6.")
+            self.border_collisions_politic.stateChanged.connect(self.change_border_collisions_politic)
+            self.extreme_lock_checkbox.stateChanged.connect(self.extreme_lock_dialog_function)
 
     def extreme_lock_dialog_function(self):
         if self.extreme_lock_checkbox.isChecked():
