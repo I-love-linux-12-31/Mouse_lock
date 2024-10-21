@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1.0"
+VERSION="1.0.1"
 SOURCES_ARH="Mouse-lock-$VERSION.tar.gz"
 
 sed -i "s/^Version:.*$/Version:        $VERSION/" mouse_lock.spec

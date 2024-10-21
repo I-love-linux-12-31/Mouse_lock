@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0"
+VERSION="1.0.1"
 PACKAGE_NAME="mouse-lock"
 SOURCES_ROOT=$(pwd)
 
@@ -11,10 +11,10 @@ mkdir -p $PACKAGE_NAME-$VERSION/DEBIAN
 mkdir -p $PACKAGE_NAME-$VERSION/usr/bin
 mkdir -p $PACKAGE_NAME-$VERSION/usr/share/applications
 
-cp $SOURCES_ROOT/autolock.py $PACKAGE_NAME-$VERSION/usr/bin/
-cp $SOURCES_ROOT/main.py $PACKAGE_NAME-$VERSION/usr/bin/
-cp $SOURCES_ROOT/main.ui $PACKAGE_NAME-$VERSION/usr/bin/
-cp $SOURCES_ROOT/backend.py $PACKAGE_NAME-$VERSION/usr/bin/
+cp $SOURCES_ROOT/autolock.py $PACKAGE_NAME-$VERSION/opt/Mouse-lock/
+cp $SOURCES_ROOT/main.py $PACKAGE_NAME-$VERSION/opt/Mouse-lock/
+cp $SOURCES_ROOT/main.ui $PACKAGE_NAME-$VERSION/opt/Mouse-lock/
+cp $SOURCES_ROOT/backend.py $PACKAGE_NAME-$VERSION/opt/Mouse-lock/
 cp $SOURCES_ROOT/mouselock $PACKAGE_NAME-$VERSION/usr/bin/
 cp $SOURCES_ROOT/mouselock-gui $PACKAGE_NAME-$VERSION/usr/bin/
 
