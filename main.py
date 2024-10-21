@@ -60,7 +60,7 @@ class MainWindow(QWidget):
 
         self.extreme_lock_dialog = QMessageBox(self)
         self.extreme_lock_dialog.setWindowTitle("Warning !")
-        # self.extreme_lock_dialog.
+
         self.extreme_lock_dialog.setText("Warning! "
                                          "If you enable this mode, you will have difficult to disable mouse lock.\n"
                                          "Also you can't interact with some UI in game.\n"
