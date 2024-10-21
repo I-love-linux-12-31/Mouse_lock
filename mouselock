@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Usage: \$mouselock %command%"
+    exit 1
+fi
+
+command="python3 /opt/mouse_lock/autolock.py $@"
+
+eval $command
