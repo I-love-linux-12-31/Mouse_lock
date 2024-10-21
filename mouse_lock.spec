@@ -1,7 +1,7 @@
 %define _topdir %(pwd)/rpmbuild
 %define debug_package %{nil}
 Name:           Mouse-lock
-Version:        1.0.1
+Version:        1.0.2
 Release:        1%{?dist}
 Summary:        Application for playing games with broken mouse lock.
 License:        GPLv3

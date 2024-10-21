@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1.0.1"
+VERSION="1.0.2"
 SOURCES_ARH="Mouse-lock-$VERSION.tar.gz"
 
 sed -i "s/^Version:.*$/Version:        $VERSION/" mouse_lock.spec
@@ -18,3 +18,5 @@ cp $SOURCES_ARH rpmbuild/SOURCES/
 rpmbuild -ba rpmbuild/SPECS/mouse_lock.spec && echo -e "You can find .rpm file at \033[32m./rpmbuild/RPMS/x86_64/\033[0m"
 
 rm $SOURCES_ARH
+
+cp ./rpmbuild/RPMS/x86_64/Mouse-lock* ./

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.1"
+VERSION="1.0.2"
 PACKAGE_NAME="mouse-lock"
 SOURCES_ROOT=$(pwd)
 
@@ -8,6 +8,7 @@ BUILD_DIR=$(mktemp -d)
 cd $BUILD_DIR
 
 mkdir -p $PACKAGE_NAME-$VERSION/DEBIAN
+mkdir -p $PACKAGE_NAME-$VERSION/opt/Mouse-lock
 mkdir -p $PACKAGE_NAME-$VERSION/usr/bin
 mkdir -p $PACKAGE_NAME-$VERSION/usr/share/applications
 
@@ -24,6 +25,8 @@ Version: $VERSION
 Section: utils
 Priority: optional
 Architecture: amd64
+Depends: python3, python3-pyqt6, pyqt6-dev-tools, python3-xlib
+License: GPLv3
 Maintainer: Kuznetsov Yaroslav <yaroslav.12.31.dev@gmail.com>
 Description: Application for playing games with broken mouse lock.
 EOF
